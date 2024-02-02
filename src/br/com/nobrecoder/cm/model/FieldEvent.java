@@ -1,5 +1,5 @@
 package br.com.nobrecoder.cm.model;
 
-public enum BoardEvent {
+public enum FieldEvent {
 	OPEN, MARK, MARKOFF, EXPLODE
 }

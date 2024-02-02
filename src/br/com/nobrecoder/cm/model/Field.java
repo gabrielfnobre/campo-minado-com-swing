@@ -27,14 +27,24 @@ public class Field {
     //não vamos querer carregar o nosso código informando um campo mais de uma vez, e além disso, o LinkedHashSet
     //mantém a ordenação dos campos.
     
-    //================================== Por que usar o BiConsumer ================================================
-    //Estamos usando também uma FunctionalInterface do tipo "BiConsumer" para executar um lambda notificador sobre
-    //todos os observers...
-    private Set<BiConsumer<Field, BoardEvent>> observers = new LinkedHashSet<>();
+    //================================== ObserverField? ===========================================================
+    //São campos que implementam a interface que contém o método abstrato que deverá ser chamado assim que o evento
+    //acontecer...
+    private Set<ObserverField> observers = new LinkedHashSet<>();
 
     public Field(int row, int column){
         this.row = row;
         this.column = column;
+    }
+    
+    //Método para registrar os observadores...
+    public void registerObserver(ObserverField field) {
+    	observers.add(field);
+    }
+    
+    //Método para notificar os observadores, passando o objeto onde o evento aconteceu e o evento que aconteceu...
+    private void notifyObservers(FieldEvent event) {
+    	observers.stream().forEach(o -> o.eventOccured(this, event));
     }
 
     public boolean addNeighbors(Field field){
@@ -64,23 +74,36 @@ public class Field {
     public void alternateMark(){
         if(!open){
             marked = !marked;
+            
+            if(marked) {            	
+            	notifyObservers(FieldEvent.MARK);
+            } else {
+            	notifyObservers(FieldEvent.MARKOFF);
+            }
         }
     }
 
     public void setOpen(boolean open){
         this.open = open;
+        
+        if(open) {        	
+        	notifyObservers(FieldEvent.EXPLODE);
+        }
     }
+    
     public boolean isOpen(){
         return open;
     }
 
     public boolean toOpen(){
         if(!open && !marked){
-            open = true;
             if(undermined){
-                //FIXME:Change to GUI version!!
-            	//throw new ExplosionException();
+                notifyObservers(FieldEvent.EXPLODE);
+                return true;
             }
+            
+            setOpen(true);
+            
             if(safeNeighborhood()){
                 neighbors.forEach(n -> n.toOpen());
             }
