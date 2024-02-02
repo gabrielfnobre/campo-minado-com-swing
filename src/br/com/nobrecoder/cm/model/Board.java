@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Board {
+public class Board implements ObserverField{
     private int rows;
     private int columns;
     private int mines;
@@ -59,7 +59,9 @@ public class Board {
     private void generateFields() {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                fields.add(new Field(r, c));
+            	Field field = new Field(r, c);
+            	field.registerObserver(this);
+                fields.add(field);
             }
         }
     }
@@ -77,14 +79,12 @@ public class Board {
         int rowRefactor = row - 1;
         int columnRefactor = column -1;
         try{
-            fields.parallelStream()
+        	fields.parallelStream()
                 .filter(f -> f.getRow() == rowRefactor && f.getColumn() == columnRefactor)
                 .findFirst()
                 .ifPresent(f -> f.toOpen());
         } catch (Exception e) {
-        	//FIXME: Change the method open implementation
-            fields.forEach(f -> f.setOpen(true));
-            throw e;
+        	fields.forEach(f -> f.setOpen(true));
         }
     }
 
@@ -95,5 +95,12 @@ public class Board {
                 .filter(f -> f.getRow() == rowRefactor && f.getColumn() == columnRefactor)
                 .findFirst()
                 .ifPresent(f -> f.alternateMark());
+    }
+    
+    @Override
+    public void eventOccured(Field field, FieldEvent event) {
+    	if(event == FieldEvent.EXPLODE) {
+    		System.out.println("Explode!!!");
+    	}
     }
 }

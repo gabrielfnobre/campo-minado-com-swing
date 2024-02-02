@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.BiConsumer;
 
 public class Field {
 
@@ -98,12 +97,12 @@ public class Field {
     public boolean toOpen(){
         if(!open && !marked){
             if(undermined){
-                notifyObservers(FieldEvent.EXPLODE);
+            	notifyObservers(FieldEvent.EXPLODE);
                 return true;
             }
-            
             setOpen(true);
             
+            //open all neighborhood if no one neighbor has a bomb
             if(safeNeighborhood()){
                 neighbors.forEach(n -> n.toOpen());
             }
@@ -113,6 +112,10 @@ public class Field {
         }
     }
 
+    /**
+     * Objective:
+     * Compare if no one of neighbors has one mine
+     * */
     boolean safeNeighborhood(){
         return neighbors.stream().noneMatch(n -> n.undermined);
     }
