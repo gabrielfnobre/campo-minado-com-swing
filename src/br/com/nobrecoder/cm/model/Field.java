@@ -1,7 +1,10 @@
 package br.com.nobrecoder.cm.model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class Field {
 
@@ -13,6 +16,21 @@ public class Field {
     private boolean undermined = false;
 
     private List<Field> neighbors = new ArrayList<>();
+    
+    //================================== Padrão Usado para Implementação do Swing =================================
+    //Precisamos implementar um padrão observer para trabalhar a interface gráfica, pois como os demais campos
+    //precisarão ser informados caso um campo exploda, seja marcado ou seja seguro, há a necessidade de armazenar
+    //os demais campos interessados numa lista de observers que serão notificados...
+    
+    //================================== Por que usar o Set para armazenar os observers ===========================
+    //Optamos pelo "Set" com "LinkedHashSet" pelo fato do LinkedHashSet não aceitar duplicação de campos, pois 
+    //não vamos querer carregar o nosso código informando um campo mais de uma vez, e além disso, o LinkedHashSet
+    //mantém a ordenação dos campos.
+    
+    //================================== Por que usar o BiConsumer ================================================
+    //Estamos usando também uma FunctionalInterface do tipo "BiConsumer" para executar um lambda notificador sobre
+    //todos os observers...
+    private Set<BiConsumer<Field, BoardEvent>> observers = new LinkedHashSet<>();
 
     public Field(int row, int column){
         this.row = row;
