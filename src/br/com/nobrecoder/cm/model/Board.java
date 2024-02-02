@@ -101,6 +101,8 @@ public class Board implements ObserverField{
     public void eventOccured(Field field, FieldEvent event) {
     	if(event == FieldEvent.EXPLODE) {
     		System.out.println("Explode!!!");
+    	} else if (goalAchieved()){
+    		System.out.println("Ganhou!!!");
     	}
     }
 }
