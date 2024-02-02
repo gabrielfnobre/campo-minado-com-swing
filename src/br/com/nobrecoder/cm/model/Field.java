@@ -37,8 +37,8 @@ public class Field {
     }
     
     //Método para registrar os observadores...
-    public void registerObserver(ObserverField field) {
-    	observers.add(field);
+    public void registerObserver(ObserverField obs) {
+    	observers.add(obs);
     }
     
     //Método para notificar os observadores, passando o objeto onde o evento aconteceu e o evento que aconteceu...
