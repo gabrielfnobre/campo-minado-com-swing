@@ -97,10 +97,9 @@ public class Field {
     public boolean toOpen(){
         if(!open && !marked){
             if(undermined){
-            	notifyObservers(FieldEvent.EXPLODE);
+            	setOpen(true);
                 return true;
             }
-            setOpen(true);
             
             //open all neighborhood if no one neighbor has a bomb
             if(safeNeighborhood()){
