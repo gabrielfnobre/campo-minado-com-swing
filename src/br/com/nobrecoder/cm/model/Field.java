@@ -69,6 +69,10 @@ public class Field {
     public boolean isMarked(){
         return marked;
     }
+    
+    public boolean isUndermined() {
+    	return undermined;
+    }
 
     public void alternateMark(){
         if(!open){
@@ -84,10 +88,6 @@ public class Field {
 
     public void setOpen(boolean open){
         this.open = open;
-        
-        if(open) {        	
-        	notifyObservers(FieldEvent.EXPLODE);
-        }
     }
     
     public boolean isOpen(){
@@ -96,12 +96,12 @@ public class Field {
 
     public boolean toOpen(){
         if(!open && !marked){
+        	setOpen(true);
             if(undermined){
-            	setOpen(true);
+            	notifyObservers(FieldEvent.EXPLODE);
                 return true;
             }
-            
-            //open all neighborhood if no one neighbor has a bomb
+            //open all neighborhood no have a bomb
             if(safeNeighborhood()){
                 neighbors.forEach(n -> n.toOpen());
             }
