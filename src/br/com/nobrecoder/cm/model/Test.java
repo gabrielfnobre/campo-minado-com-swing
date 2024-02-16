@@ -1,6 +1,4 @@
-package br.com.nobrecoder.cm.vision;
-
-import br.com.nobrecoder.cm.model.Board;
+package br.com.nobrecoder.cm.model;
 
 public class Test {
 //	public static void main(String[] args) {
@@ -14,7 +12,7 @@ public class Test {
 //			}
 //		});
 //		
-////		board.toOpen(1, 1);
+//		board.toOpen(1, 1);
 //		
 ////		board.toMark(1, 1);
 ////		board.toMark(1, 2);

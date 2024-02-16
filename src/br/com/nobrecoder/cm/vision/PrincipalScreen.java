@@ -5,22 +5,28 @@ import javax.swing.JFrame;
 import br.com.nobrecoder.cm.model.Board;
 
 @SuppressWarnings("serial")
-public class PrincipalScreen extends JFrame{
-	public PrincipalScreen(int width, int height) {
-		Board board = new Board(16, 30, 50);
-		PrincipalPanel ppanel = new PrincipalPanel(board);
-		
-		setTitle("Campo Minado");
-		setSize(width, height);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		add(ppanel);
-		
-		setVisible(true);
-	}
+public class PrincipalScreen extends JFrame{ //Essa classe extende de JFrame...
+	
 	
 	public static void main(String[] args) {	
+		//Criamos uma instância anônima de uma tela passando o tamanho de largura e altura da tela...
 		new PrincipalScreen(690, 438);
 	}
+	
+	
+	//Método Constructor
+	public PrincipalScreen(int width, int height) {
+		Board board = new Board(16, 30, 50); //Instancia o tabuleiro com número de linhas, colunas e bombas...
+		PrincipalPanel ppanel = new PrincipalPanel(board); //Instancia o painel principal passando o tabuleiro como parametro...
+		
+		setTitle("Campo Minado"); //Atribuí um nome a janela principal...
+		setSize(width, height); //Atribuí um tamanho a janela...
+		setLocationRelativeTo(null); //Define que ficará centralizada no monitor...
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //Define que a execução do programa é encerrada ao fechar a tela...
+
+		add(ppanel); //Adicionamos o painel a janela...
+		
+		setVisible(true); //A visibilidade tem que ser true para podermos visualizar a janela...
+	}
+	
 }

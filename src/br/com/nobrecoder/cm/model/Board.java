@@ -56,6 +56,10 @@ public class Board implements ObserverField{
     public List<Field> getFields(){
         return fields;
     }
+    
+    public void forEachFields(Consumer<Field> function) {
+    	fields.forEach(function);
+    }
 
     //Método registrador dos campos...
     public void registerObservers(Consumer<Boolean> observer) {
