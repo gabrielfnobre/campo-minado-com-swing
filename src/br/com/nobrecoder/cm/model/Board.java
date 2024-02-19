@@ -57,6 +57,10 @@ public class Board implements ObserverField{
         return fields;
     }
     
+    /**@Objetivo
+     * Um método genérico que utilizará um consumer para fazer operações consectivas sobre os campos do tabuleiro.
+     * Permitindo que qualquer lambda sem retorno possa executada sobre todos os campos do tabuleiro.
+     * */
     public void forEachFields(Consumer<Field> function) {
     	fields.forEach(function);
     }
