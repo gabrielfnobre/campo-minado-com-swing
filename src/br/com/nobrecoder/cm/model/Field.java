@@ -88,6 +88,10 @@ public class Field {
 
     public void setOpen(boolean open){
         this.open = open;
+        
+        if(open) {        	
+        	notifyObservers(FieldEvent.OPEN);
+        }
     }
     
     public boolean isOpen(){
@@ -115,7 +119,7 @@ public class Field {
      * Objective:
      * Compare if no one of neighbors has one mine
      * */
-    boolean safeNeighborhood(){
+    public boolean safeNeighborhood(){
         return neighbors.stream().noneMatch(n -> n.undermined);
     }
 
@@ -143,8 +147,8 @@ public class Field {
         return discovered || protectedIs;
     }
 
-    public long minesInTheNeighborhood(){
-        return neighbors.stream().filter(n -> n.undermined).count();
+    public int minesInTheNeighborhood(){
+        return (int) neighbors.stream().filter(n -> n.undermined).count();
     }
 
     public void restart(){
