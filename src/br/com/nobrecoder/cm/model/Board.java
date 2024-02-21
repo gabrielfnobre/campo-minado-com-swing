@@ -133,6 +133,7 @@ public class Board implements ObserverField{
     public void toShowAllMines(){
         fields.stream()
         	.filter(f -> f.isUndermined())
+        	.filter(f -> !f.isMarked())
        		.forEach(f -> f.setOpen(true));
     }
 

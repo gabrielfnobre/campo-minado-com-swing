@@ -58,26 +58,36 @@ public class ButtonField extends JButton implements ObserverField, MouseListener
 
 
 	private void buttonStylePattern() {
-		// TODO Auto-generated method stub
-		
+		setBackground(BG_PATTERN);
+		setText("");
 	}
 
 
 	private void buttonStyleEXPLODE() {
-		// TODO Auto-generated method stub
-		
+		setBackground(BG_EXPLODED);
+		setForeground(Color.WHITE);
+		setText("X");
 	}
 
 
 	private void buttonStyleMARK() {
-		// TODO Auto-generated method stub
-		
+		setBackground(BG_MARKED);
+		setForeground(Color.WHITE);
+		setText("M");
 	}
 
 
 	private void buttonStyleOPEN() {
-		setBackground(BG_PATTERN);
+
 		setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		
+		if(field.isUndermined()) {
+			setBackground(BG_EXPLODED);
+			setText("<>");
+			return;
+		}
+		
+		setBackground(BG_PATTERN);
 		
 		switch (field.minesInTheNeighborhood()) {
 			case 1:
