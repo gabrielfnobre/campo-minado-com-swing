@@ -21,9 +21,9 @@ public class PrincipalPanel extends JPanel{ //Essa classe extende de JPanel...
 		
 		board.registerObservers(e -> {
 			if(board.goalAchieved()) {				
-				JOptionPane.showMessageDialog(this, "YOU WIN!!! \\(Ü)/");
+				JOptionPane.showMessageDialog(this, "YOU WIN!!! 😃");
 			} else {				
-				JOptionPane.showMessageDialog(this, "YOU LOSE (¨-)");
+				JOptionPane.showMessageDialog(this, "YOU LOSE 😞");
 			}
 		});
 		
