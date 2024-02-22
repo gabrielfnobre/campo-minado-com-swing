@@ -155,6 +155,7 @@ public class Field {
         open = false;
         undermined = false;
         marked = false;
+        notifyObservers(FieldEvent.RESTART);
     }
 
 }

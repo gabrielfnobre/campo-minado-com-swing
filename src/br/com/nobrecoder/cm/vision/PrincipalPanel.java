@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import br.com.nobrecoder.cm.model.Board;
 
@@ -20,11 +21,17 @@ public class PrincipalPanel extends JPanel{ //Essa classe extende de JPanel...
 		board.forEachFields(c -> add(new ButtonField(c))); //Nós criamos na classe "board" um método que recebe um consumer que irá iterar sobre cada campo do tabuleiro adicionando um novo botão ao painel principal por através do método "add" de JPainel...
 		
 		board.registerObservers(e -> {
-			if(board.goalAchieved()) {				
-				JOptionPane.showMessageDialog(this, "YOU WIN!!! 😃");
-			} else {				
-				JOptionPane.showMessageDialog(this, "YOU LOSE 😞");
-			}
+			
+			SwingUtilities.invokeLater(() -> {				
+				if(board.goalAchieved()) {				
+					JOptionPane.showMessageDialog(this, "YOU WIN!!! 😃");
+				} else {				
+					JOptionPane.showMessageDialog(this, "YOU LOSE 😞");
+				}
+				
+				board.restart();
+			});
+			
 		});
 		
 	}

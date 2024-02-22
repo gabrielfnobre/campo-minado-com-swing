@@ -123,7 +123,7 @@ public class Board implements ObserverField{
     }
 
     public void restart(){
-        fields.stream().forEach(f -> f.restart());
+    	fields.stream().forEach(f -> f.restart());
         drawMines();
     }
 

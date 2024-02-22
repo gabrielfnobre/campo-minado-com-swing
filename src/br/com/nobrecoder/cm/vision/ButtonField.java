@@ -59,6 +59,7 @@ public class ButtonField extends JButton implements ObserverField, MouseListener
 
 	private void buttonStylePattern() {
 		setBackground(BG_PATTERN);
+		setBorder(BorderFactory.createBevelBorder(0));
 		setText("");
 	}
 
