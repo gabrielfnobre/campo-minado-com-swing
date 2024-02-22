@@ -66,7 +66,7 @@ public class ButtonField extends JButton implements ObserverField, MouseListener
 	private void buttonStyleEXPLODE() {
 		setBackground(BG_EXPLODED);
 		setForeground(Color.WHITE);
-		setText("X");
+		setText("💥");
 	}
 
 
@@ -83,7 +83,7 @@ public class ButtonField extends JButton implements ObserverField, MouseListener
 		
 		if(field.isUndermined()) {
 			setBackground(BG_EXPLODED);
-			setText("<>");
+			setText("💣");
 			return;
 		}
 		

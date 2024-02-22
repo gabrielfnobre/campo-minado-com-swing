@@ -13,6 +13,7 @@ public class Board implements ObserverField{
     private int rows;
     private int columns;
     private int mines;
+    private boolean win;
 
     private final List<Field> fields = new ArrayList<>();
     
@@ -56,6 +57,11 @@ public class Board implements ObserverField{
     public List<Field> getFields(){
         return fields;
     }
+    
+    public boolean isWin() {
+    	return win;
+    }
+    
     
     /**@Objetivo
      * Um método genérico que utilizará um consumer para fazer operações consectivas sobre os campos do tabuleiro.
