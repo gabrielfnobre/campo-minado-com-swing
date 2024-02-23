@@ -9,22 +9,27 @@ import java.util.function.Predicate;
 
 import javax.xml.bind.NotIdentifiableEvent;
 
+/**@Objetivo_da_classe
+ * Implementa o tabuleiro do jogo. Essa classe é responsável por definir quantas linhas, colunas e minas um jogo deverá ter, bem como comportamentos que deverão ser percebidos pelo tabuleiro, como: quando uma bomba é disparada ou quando o jogo é ganho.
+ * <p><p>
+ * O tabuleiro também terá ser um subject, assim como o campo, visto que o campo fica assistindo uma interação por parte do usuário para poder notificar o tabuleiro se um campo foi aberto, ou se o usuário ganhou o jogo, o tabuleiro também será um subject para os campos, pois assim que receber a notificação de que qualquer um dos campos quanto a uma explosão ou vitória, ele deverá notificar todos os demais campos, para que eles sejam abertos.
+ * <p><p>
+ * @implements
+ * ObserverField é uma functional interface que criamos para todos os observadores dos eventos que ocorrem nos campos. Por através dela devemos implementar o método eventOccured, responsável por identificar o campo onde o evento ocorre e qual tipo de evento ocorreu por através de uma Enum;
+ * */
 public class Board implements ObserverField{
+	/**@attributes*/
     private int rows;
     private int columns;
     private int mines;
-    private boolean win;
 
     private final List<Field> fields = new ArrayList<>();
     
-    //O tabuleiro também terá ser um subject, assim como o campo, visto que o campo fica assistindo uma
-    //interação por parte do usuário para poder notificar o tabuleiro se um campo foi aberto, ou se o
-    //usuário ganhou o jogo, o tabuleiro também será um subject para os campos, pois assim que receber
-    //a notificação de que qualquer um dos campos quanto a uma explosão ou vitória, ele deverá notificar
-    //todos os demais campos, para que eles sejam abertos...
+    /**
+     * O tabuleiro também terá ser um subject, assim como o campo, visto que o campo fica assistindo uma interação por parte do usuário para poder notificar o tabuleiro se um campo foi aberto, ou se o usuário ganhou o jogo, o tabuleiro também será um subject para os campos, pois assim que receber a notificação de que qualquer um dos campos quanto a uma explosão ou vitória, ele deverá notificar todos os demais campos, para que eles sejam abertos...
     
     //Abaixo temos uma collection para armazenar todos os campos como observers, note que nesse exemplo
-    //ao invés de criar nossa própria interface, estamos usando uma pré-existente do java...
+    //ao invés de criar nossa própria interface, estamos usando uma pré-existente do java...*/
     private final Set<Consumer<Boolean>> observers = new LinkedHashSet<>();
 
     /**
@@ -56,10 +61,6 @@ public class Board implements ObserverField{
 
     public List<Field> getFields(){
         return fields;
-    }
-    
-    public boolean isWin() {
-    	return win;
     }
     
     
